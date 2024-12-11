@@ -1,0 +1,210 @@
+{{ isloading }}
+<p *ngIf="isloading">.....................</p>
+
+<section class="bg-secondary bg-gradient p-4">
+  <div class="container-fluid parent p-3 bg-white shadow rounded">
+    <div
+      class="d-flex justify-content-between align-item-center text-center mb-2" >
+      <p>البرامج التربوية</p>
+
+      <a routerLink="/addprogramm">
+        <button  class="btn btn-success"routerLinkActive="router-link-active">
+          + برنامج جديد
+        </button>
+      </a>
+    </div>
+    <div class="px-3 parent">
+      <form [formGroup]="programsForm">
+        <div class="row">
+          <div class="col-md-3">
+            <p>المرحلة التعليميه</p>
+            <mat-form-field>
+              <mat-select
+                formControlName="educationalStageId"
+                (selectionChange)="GetClassRoomByStageId($event); onSearch()">
+                <mat-option>All Gategories</mat-option>
+                <mat-option
+                  *ngFor="let stage of getStages"
+                  [value]="stage.educationalStageId"
+                  >{{ stage.name }}</mat-option  >
+              </mat-select>
+              <mat-error  [ngClass]="programsForm.get('educationalStageId')?.touched ? (programsForm.get('educationalStageId')?.errors ? 'is-invalid':'is-valid') :''"            ></mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-3">
+            <p style="font-size: 15px">الصف الدراسي</p>
+            <mat-form-field>
+              <mat-select
+                formControlName="classroomId"
+                (selectionChange)="getAllpages(); onSearch()"
+              >
+                <mat-option value="0">All Gategories</mat-option>
+                <mat-option
+                  *ngFor="let classroom of getClassRoom"
+                  [value]="classroom.educationalStageId"
+                  >{{ classroom.name }}</mat-option
+                >
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-3">
+            <p style="font-size: 15px">نوع البرنامج</p>
+            <p style="font-size: 15px"></p>
+            <mat-form-field>
+              <mat-select
+                formControlName="programCategoryId"
+                (selectionChange)="getAllpages(); onSearch()"
+              >
+                <mat-option value="0">All Gategories</mat-option>
+                <mat-option
+                  *ngFor="let category of getCategries"
+                  [value]="category.programCategoryId"
+                  >{{ category.programCategoryName }}</mat-option
+                >
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-3">
+            <p style="font-size: 15px">حاله البرنامج</p>
+            <p style="font-size: 15px"></p>
+            <mat-form-field>
+              <mat-select
+                formControlName="programStatusId"
+                (selectionChange)="getAllpages(); onSearch()"
+              >
+                <mat-option value="0">الكل</mat-option>
+                <mat-option value="1">تم التقيم</mat-option>
+                <mat-option value="2">تم التقيم جزئيا</mat-option>
+                <mat-option value="3">لم يقيم</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-3">
+            <p>من تاريخ</p>
+            <mat-form-field>
+              <mat-label>Choose a date</mat-label>
+              <input
+                matInput
+                (selectionchange)="onSearch()"
+                [matDatepicker]="picker"
+                formControlName="fromDate"
+              />
+              <mat-datepicker-toggle
+                matIconSuffix
+                [for]="picker"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-3">
+            <p>الي تاريخ</p>
+            <mat-form-field>
+              <mat-label>Choose a date</mat-label>
+              <input
+                matInput
+                (selectionchange)="onSearch()"
+                [matDatepicker]="picker"
+                formControlName="toDate"
+              />
+              <mat-datepicker-toggle
+                matIconSuffix
+                [for]="picker"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-3">
+            <p>بحث</p>
+            <mat-form-field>
+              <mat-label></mat-label>
+              <input
+                matInput
+                placeholder="search"
+                formControlName="search"
+                (onchange)="onSearch()"
+                (keyup.enter)="onSearch()"
+                value=""
+              />
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          </div>
+        </div>
+      </form>
+    </div>
+    {{ isloading }}
+    <div
+      class="container-fluid mt-2 p-0 rounded"*ngIf="!isloading && getAllPagesList && getAllPagesList.recordCount > 0" >
+      <table
+        class="table table-bordered table-striped text-center border border-1 shadow"
+      >
+        <thead>
+          <tr>
+            <th>م</th>
+            <th
+              style="cursor: pointer"
+              (click)="sorting(1)"
+              class="border borderp-2 p-3"
+            >
+              اسم البرنامج
+            </th>
+            <th class="border borderp-2 p-3">نوع البرنامج</th>
+            <th class="border borderp-2 p-3">تاريخ البداية</th>
+            <th class="border borderp-2 p-3">المرحلة التعليميه</th>
+            <th class="border borderp-2 p-3">انشئ بواسطه</th>
+            <th class="border borderp-2 p-3">الموقع</th>
+            <th class="border borderp-2 p-3">خطط البرامج</th>
+            <th class="border borderp-2 p-3">نشر</th>
+            <th class="border borderp-2 p-3">عرض</th>
+            <th class="border borderp-2 p-3">تعديل</th>
+            <th class="border borderp-2 p-3">حذف</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let pagelist of getAllPagesList?.items">
+            <td>{{ pagelist.programId }}</td>
+            <td>{{ pagelist.name }}</td>
+            <td>{{ pagelist.programCategoryName }}</td>
+            <td>{{ pagelist.fromDate }}</td>
+
+            <td>
+              <ul *ngFor="let category of pagelist?.stages" class="">
+                {{category}}
+                <li></li>
+              </ul>
+            </td>
+
+            <td>{{ pagelist.createdByName }}</td>
+            <td>{{ pagelist.programHallName }}</td>
+            <td>....</td>
+            <td>
+              <input type="checkbox" />
+            </td>
+            <td>
+              <mat-icon>
+                <span class="material-symbols-outlined"> visibility </span>
+              </mat-icon>
+            </td>
+            <td>
+              <mat-icon>
+                <span class="material-symbols-outlined"> edit </span>
+              </mat-icon>
+            </td>
+            <td>
+              <mat-icon>
+                <span class="material-symbols-outlined"> delete </span>
+              </mat-icon>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>

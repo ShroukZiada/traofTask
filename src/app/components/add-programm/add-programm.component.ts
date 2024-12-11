@@ -54,7 +54,6 @@ export class AddProgrammComponent implements OnInit {
     // this.onemptied()
     this.getprogramSupervisors();
     this.CustomValidators();
-    this.clearValidators();
   }
 
   intialForm() {
@@ -95,7 +94,7 @@ export class AddProgrammComponent implements OnInit {
       modifiedDate: [''],
       modifiedBy: [''],
       educationStagePrograms: this.fb.array([], this.minArrayLength()),
-      activityGroupPrograms: this.fb.array([],this.minArrayLength()),
+      activityGroupPrograms: this.fb.array([]),
       programSupervisors: this.fb.array([]),
     });
   }
@@ -237,10 +236,6 @@ export class AddProgrammComponent implements OnInit {
 
 
 
-
-
-
-
 // ********************START EducationSList **************************
   get educationStagePrograms(): FormArray {
     return this.FormSelection.get('educationStagePrograms') as FormArray;
@@ -258,7 +253,6 @@ export class AddProgrammComponent implements OnInit {
   }
 
   onCheckboxChange(event: any) {
-    // this.educationStagePrograms.clear()
     let Id = event.target.value;
     console.log(Id);
 
@@ -322,10 +316,29 @@ get programSupervisors(): FormArray{
   return this.FormSelection.get('programSupervisors') as FormArray;
 }
 
-FillprogramSupervisors(){
-// programSupervisorId
-//   programId
-//   supervisorId
+FillprogramSupervisors(supervisorId:string,isGroupEvaluation:boolean,isStudentEvaluation:boolean,canEditOldEvaluation:boolean,oldEvaluationDaysCount:boolean){
+  let SupervisorForm = this.fb.group({
+    supervisorId: [supervisorId],
+    isGroupEvaluation: [isGroupEvaluation],
+    isStudentEvaluation: [isStudentEvaluation],
+    canEditOldEvaluation: [canEditOldEvaluation],
+    oldEvaluationDaysCount: [oldEvaluationDaysCount],
+  })
+  console.log(SupervisorForm.controls);
+  this.programSupervisors.push(SupervisorForm)
+  console.log(this.programSupervisors.value);
+}
+
+text(event: any){
+  let Id =this.FormSelection.get('programSupervisors')?.value;
+  console.log(Id);
+
+
+  // if (event.target.checked) {
+  // }
+
+
+ 
 }
 
 getprogramSupervisors(){
@@ -381,13 +394,10 @@ CustomValidators() {
     } 
      else{
       this.FormSelection.get('pagesCount')?.clearValidators();
-      this.FormSelection.patchValue({
-        pagesCount:''
-      })
-
       this.FormSelection.get('discussionDate')?.clearValidators();
       this.FormSelection.patchValue({
-        pagesCount:''
+        pagesCount:'',
+        discussionDate:'',
       })
     }
     this.FormSelection.get('pagesCount')?.updateValueAndValidity();
@@ -400,13 +410,10 @@ CustomValidators() {
     }
      else{
      this.FormSelection.get('trainerName')?.clearValidators();
+     this.FormSelection.get('hoursCount')?.clearValidators();
       this.FormSelection.patchValue({
-        pagesCount:''
-      })
-
-      this.FormSelection.get('hoursCount')?.clearValidators();
-      this.FormSelection.patchValue({
-        pagesCount:''
+        trainerName:'',
+        hoursCount:'',
       })
     }
       this.FormSelection.get('trainerName')?.updateValueAndValidity();
@@ -416,20 +423,24 @@ CustomValidators() {
 
      if  (val == 1) {
       this.FormSelection.get('activityGroupPrograms')?.setValidators(this.minArrayLength())
+      this.FormSelection.get('educationStagePrograms')?.clearValidators()
+
     } else{
       this.FormSelection.get('activityGroupPrograms')?.clearValidators();
+      this.FormSelection.get('educationStagePrograms')?.setValidators(this.minArrayLength())
+
       this.FormSelection.patchValue({
-        pagesCount:''
+        activityGroupPrograms:[],
+        educationStagePrograms:[]
       })
     }
     this.FormSelection.get('activityGroupPrograms')?.updateValueAndValidity();
+    this.FormSelection.get('educationStagePrograms')?.updateValueAndValidity();
   })
-    
 }
 
-clearValidators(){
-  this.FormSelection.get('activityGroupPrograms')?.clearValidators();
-}
+
+
 }
 
 

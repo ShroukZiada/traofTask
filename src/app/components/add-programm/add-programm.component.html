@@ -327,12 +327,12 @@
             </thead>
 
             <tbody>
-              <tr >
+              <tr  (change)="text($event)" >
                 <td class="w-50 text-center">
                   <select class="form-select" >
                     <option >اختر</option>
                     <option *ngFor="let SupervisorName of programSupervisorsList" >
-                    {{SupervisorName.name + ' ' +  SupervisorName.fatherName + '  ' +  SupervisorName.familyName}}
+                    {{SupervisorName.fullName}}
                     </option>
                   </select>
                 </td>
@@ -355,7 +355,7 @@
                   </div>
                 </td>      
                 <td>
-                  <input type="number"  style="width: 20px;">
+                  <input type="number"  style="width: 50px;">
                 </td>      
                 <td>
                   <button class="btn btn-primary" type="submit">

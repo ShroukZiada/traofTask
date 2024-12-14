@@ -12,6 +12,7 @@ import { AddProgramService } from './services/addProgram.service';
 import { CommonModule } from '@angular/common';
 import { log } from 'console';
 import { RouterModule } from '@angular/router';
+declare var $: any;
 
 @Component({
   selector: 'app-add-programm',
@@ -20,6 +21,7 @@ import { RouterModule } from '@angular/router';
   templateUrl: './add-programm.component.html',
   styleUrl: './add-programm.component.scss',
 })
+// declare var $: any;
 export class AddProgrammComponent implements OnInit {
 
   x!: FormGroup;
@@ -326,30 +328,15 @@ export class AddProgrammComponent implements OnInit {
   //   { supervisorId: "بشري علي ساؤي العنزي", id: '4', isStudentEvaluation: false, isGroupEvaluation: false, canEditOldEvaluation: false, oldEvaluationDaysCount: 0 },
   // ]
 
-  get programSupervisors(): FormArray {
-    return this.FormSelection.get('programSupervisors') as FormArray;
-  }
-  SupervisorForm: any
-  FillprogramSupervisors(
-    supervisorId: string,
-    isStudentEvaluation: boolean,
-    isGroupEvaluation: boolean,
-    canEditOldEvaluation: boolean,
-    oldEvaluationDaysCount: number) {
-    this.SupervisorForm = this.fb.group({
-      supervisorId: [supervisorId],
-      isStudentEvaluation: [isStudentEvaluation],
-      isGroupEvaluation: [isGroupEvaluation],
-      canEditOldEvaluation: [canEditOldEvaluation],
-      oldEvaluationDaysCount: [oldEvaluationDaysCount],
-    })
-    console.log(this.SupervisorForm.controls);
-    this.programSupervisors.push(this.SupervisorForm)
-    // console.log(this.programSupervisors.value);
-  }
 
 
   myForm!: FormGroup;
+  a: any;
+  b: any;
+  c: any;
+  d: any;
+  e: any;
+
   text() {
     this.myForm = this.fb.group({
       supervisorId: ['', Validators.required],
@@ -358,15 +345,63 @@ export class AddProgrammComponent implements OnInit {
       canEditOldEvaluation: [false],
       oldEvaluationDaysCount: [0],
     })
-    this.programSupervisors.push(this.myForm)
+    this.a = this.myForm.controls['supervisorId'].value;
+    this.b = this.myForm.controls['isStudentEvaluation'].value;
+    this.c = this.myForm.controls['isGroupEvaluation'].value;
+    this.d = this.myForm.controls['canEditOldEvaluation'].value;
+    this.e = this.myForm.controls['oldEvaluationDaysCount'].value;
+
+    // this.programSupervisors.push(this.a,this.b,this.c,this.d,this.e)
+  }
+  // test2() {
+  //   console.log(this.myForm.value);
+  //   console.log(this.d);
+  // }
+
+
+  get programSupervisors(): FormArray {
+    return this.FormSelection.get('programSupervisors') as FormArray;
+  }
+  SupervisorForm: any;
+  FillprogramSupervisors() {
+    this.SupervisorForm = this.fb.group({
+      supervisorId: this.myForm.controls['supervisorId'].value,
+      isStudentEvaluation: this.myForm.controls['isStudentEvaluation'].value,
+      isGroupEvaluation: this.myForm.controls['isGroupEvaluation'].value,
+      canEditOldEvaluation: this.myForm.controls['canEditOldEvaluation'].value,
+      oldEvaluationDaysCount: this.myForm.controls['oldEvaluationDaysCount'].value,
+    })
+    console.log(this.SupervisorForm.controls);
+    this.programSupervisors.push(this.SupervisorForm)
+    console.log(this.programSupervisors.value);
+    $('#toggleButton').click(function () {
+      // If the icon has the fa-plus class, remove it and add fa-minus class
+      if ($('#toggleButton i').hasClass('fa-plus')) {
+        $('#toggleButton i').removeClass('fa-plus').addClass('fa-minus');
+      }
+    });
+  }
+
+  send() {
+
+    this.FillprogramSupervisors()
+    // if (this.programSupervisors.length >= 1) {
+
+    //   $('#toggleButton').click(function () {
+    //     // If the icon has the fa-plus class, remove it and add fa-minus class
+    //     if ($('#toggleButton i').hasClass('fa-plus')) {
+    //       $('#toggleButton i').removeClass('fa-plus').addClass('fa-minus');
+    //     } else {
+    //       // If the icon has the fa-minus class, remove it and add fa-plus class
+    //       // $('#toggleButton i').removeClass('fa-minus').addClass('fa-plus');
+    //     }
+    //   });
+    // }
+
 
   }
-  test2() {
-    console.log(this.myForm.value);
-    console.log(this.programSupervisors);
-  }
-  // (this.form.get('items') as FormArray).push(newFormGroup);
-  // 
+
+
 
   getprogramSupervisors() {
     this._AddProgramService.programSupervisors.subscribe((res) => {
@@ -374,7 +409,6 @@ export class AddProgrammComponent implements OnInit {
       console.log(this.programSupervisorsList);
     })
   }
-
   // ******************** END programSupervisors **************************
 
   OnSave() {

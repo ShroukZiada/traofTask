@@ -292,7 +292,7 @@
         <div class="col-md-12">
 
 
-          <form [formGroup]="myForm" (ngSubmit)="test2()">
+          <form [formGroup]="myForm">
             <table class=" table-cp-list ng-pristine table table-bordered border-primary">
               <thead>
                 <tr>
@@ -336,7 +336,11 @@
 
                   </td>
                   <td>
-                    <button type="submit">Submit</button>
+                    <button (click)=" send()" type="submit" class="btn btn-primary" id="toggleButton">
+
+                      <i class="fa-solid fa-plus"></i>
+                      <!-- <i class="fa-solid fa-minus d-none"></i> -->
+                    </button>
 
                   </td>
                 </tr>

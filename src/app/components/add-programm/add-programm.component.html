@@ -3,27 +3,21 @@
     <div class="mt-5">
       <p>البرامج التربوية</p>
 
-      <form class="form-inpts" [formGroup]="FormSelection" 
-      (ngSubmit)="onSubmit()">
+      <form class="form-inpts" [formGroup]="FormSelection" (ngSubmit)="onSubmit()">
         <div class="row">
           <div class="col-md-3">
             <label for="">اسم البرنامج</label>
-            <input  formControlName="name"
-              type="text" 
-             [ngClass]="FormSelection.get('name')?.touched ? (FormSelection.get('name')?.errors ? 'is-invalid':'is-valid')  :''"
-              class="form-control "
-               />
+            <input formControlName="name" type="text"
+              [ngClass]="FormSelection.get('name')?.touched ? (FormSelection.get('name')?.errors ? 'is-invalid':'is-valid')  :''"
+              class="form-control " />
           </div>
 
 
           <div class="col-md-3">
             <label for="">نوع البرنامج</label>
-            <select (change)="test()" 
-      
-              class="form-select"
-              formControlName="programCategoryId" 
-             [ngClass]="FormSelection.get('programCategoryId')?.touched ? (FormSelection.get('programCategoryId')?.errors ? 'is-invalid':'is-valid')  :''">>           
-              <option >اختر</option>
+            <select (change)="test()" class="form-select" formControlName="programCategoryId"
+              [ngClass]="FormSelection.get('programCategoryId')?.touched ? (FormSelection.get('programCategoryId')?.errors ? 'is-invalid':'is-valid')  :''">>
+              <option>اختر</option>
               <option value="1"> مجموعات</option>
               <option value="2"> فردي</option>
               <option value="3"> مشاريع</option>
@@ -34,10 +28,10 @@
           </div>
 
 
-          <div class="col-md-3" >
+          <div class="col-md-3">
             <label for="">الموقع</label>
-            <select  formControlName="place" class="form-select" 
-            [ngClass]="FormSelection.get('place')?.touched ? (FormSelection.get('place')?.errors ? 'is-invalid':'is-valid')  :''">
+            <select formControlName="place" class="form-select"
+              [ngClass]="FormSelection.get('place')?.touched ? (FormSelection.get('place')?.errors ? 'is-invalid':'is-valid')  :''">
               <option value="">اختر</option>
               <option value="1"> قاعة الشريع</option>
               <option value="2"> قاعة الفوزان</option>
@@ -51,10 +45,9 @@
 
           <div class="col-md-3">
             <label for="">المجال التربوي</label>
-            <select formControlName="educationFieldId" 
-            class="form-select" 
-            [ngClass]="FormSelection.get('educationFieldId')?.touched ? (FormSelection.get('educationFieldId')?.errors ? 'is-invalid':'is-valid')  :''">>
-              <option >اختر</option>
+            <select formControlName="educationFieldId" class="form-select"
+              [ngClass]="FormSelection.get('educationFieldId')?.touched ? (FormSelection.get('educationFieldId')?.errors ? 'is-invalid':'is-valid')  :''">>
+              <option>اختر</option>
               <option value="1"> إيماني</option>
               <option value="2"> العلم الشرعي</option>
               <option value="3"> الأخلاقي و السلوكي</option>
@@ -64,15 +57,14 @@
           </div>
         </div>
 
-<!-- ///////////////////////////////////////////////////////////////////// -->
+        <!-- ///////////////////////////////////////////////////////////////////// -->
 
         <div class="row mt-5">
           <div class="col-md-3">
             <label for="">الوسيلة التربوية</label>
-            <select class="form-select"
-             formControlName="educationMethodId"
-             [ngClass]="FormSelection.get('educationMethodId')?.touched ? (FormSelection.get('educationMethodId')?.errors ? 'is-invalid':'is-valid')  :''">>
-              <option >اختر</option>
+            <select class="form-select" formControlName="educationMethodId"
+              [ngClass]="FormSelection.get('educationMethodId')?.touched ? (FormSelection.get('educationMethodId')?.errors ? 'is-invalid':'is-valid')  :''">>
+              <option>اختر</option>
               <option value="1"> ندوة</option>
               <option value="2"> محاضرة</option>
               <option value="3"> دورة</option>
@@ -83,10 +75,8 @@
 
           <div class="col-md-3">
             <label for="">السعه</label>
-            <input type="number" 
-            class="form-control "
-            formControlName="capacity" 
-            [ngClass]="FormSelection.get('capacity')?.touched ? (FormSelection.get('capacity')?.errors ? 'is-invalid':'is-valid')  :''">     
+            <input type="number" class="form-control " formControlName="capacity"
+              [ngClass]="FormSelection.get('capacity')?.touched ? (FormSelection.get('capacity')?.errors ? 'is-invalid':'is-valid')  :''">
           </div>
 
 
@@ -96,12 +86,10 @@
               <div class="form-control">
                 <!-- <input class="form-check-input mt-0"
                  type="radio" value="" /> -->
-                 <input type="checkbox" 
-                 formControlName="allowOnlineRegistration" 
-                 [ngClass]="FormSelection.get('allowOnlineRegistration')?.touched ? (FormSelection.get('allowOnlineRegistration')?.errors ? 'is-invalid':'is-valid')  :''"
-                 />
+                <input type="checkbox" formControlName="allowOnlineRegistration"
+                  [ngClass]="FormSelection.get('allowOnlineRegistration')?.touched ? (FormSelection.get('allowOnlineRegistration')?.errors ? 'is-invalid':'is-valid')  :''" />
               </div>
-            
+
             </div>
           </div>
 
@@ -109,267 +97,261 @@
           <div class="col-md-3">
             <label for="">من تاريخ</label>
             <input formControlName="fromDate"
-            [ngClass]="FormSelection.get('fromDate')?.touched ? (FormSelection.get('fromDate')?.errors ? 'is-invalid':'is-valid')  :''"
-             type="datetime-local"
-              class="form-control" />
+              [ngClass]="FormSelection.get('fromDate')?.touched ? (FormSelection.get('fromDate')?.errors ? 'is-invalid':'is-valid')  :''"
+              type="datetime-local" class="form-control" />
           </div>
         </div>
 
- <!-- ////////////////////////////////////////////////////////////// -->
+        <!-- ////////////////////////////////////////////////////////////// -->
 
         <div class="row mt-5">
           <div class="col-md-3">
             <label for="">الي تاريخ</label>
-            <input formControlName="toDate"
-             type="datetime-local" 
-             [ngClass]="FormSelection.get('toDate')?.touched ? (FormSelection.get('toDate')?.errors ? 'is-invalid':'is-valid')  :''"
-             class="form-control" />
+            <input formControlName="toDate" type="datetime-local"
+              [ngClass]="FormSelection.get('toDate')?.touched ? (FormSelection.get('toDate')?.errors ? 'is-invalid':'is-valid')  :''"
+              class="form-control" />
           </div>
 
 
           <div class="col-md-3">
             <label for="">من</label>
-            <input type="time" 
-            formControlName="fromTime"
-            [ngClass]="{'is-invalid': FormSelection.get('fromTime')?.invalid && (FormSelection.get('fromTime')?.touched || FormSelection.get('fromTime')?.dirty)}"
-             class="form-control" />
+            <input type="time" formControlName="fromTime"
+              [ngClass]="{'is-invalid': FormSelection.get('fromTime')?.invalid && (FormSelection.get('fromTime')?.touched || FormSelection.get('fromTime')?.dirty)}"
+              class="form-control" />
           </div>
-        
-          
+
+
           <div class="col-md-3">
             <label for="">الي</label>
-            <input type="time" 
-            formControlName="toTime"
-            [ngClass]="{'is-invalid': FormSelection.get('toTime')?.invalid && (FormSelection.get('toTime')?.touched || FormSelection.get('toTime')?.dirty)}"
-             class="form-control" />
+            <input type="time" formControlName="toTime"
+              [ngClass]="{'is-invalid': FormSelection.get('toTime')?.invalid && (FormSelection.get('toTime')?.touched || FormSelection.get('toTime')?.dirty)}"
+              class="form-control" />
           </div>
-        
+
           <div class="col-md-3">
             <label for="">المبادرة</label>
-            <select (change)="getAllProgramName($event)" 
-            formControlName="initiativeId"
-            class="form-select"
-            [ngClass]="FormSelection.get('initiativeId')?.touched ? (FormSelection.get('initiativeId')?.errors ? 'is-invalid':'is-valid') :''"  
-              formControlName="initiativeId" >
-              <option  >اختر</option>
-              <option [value]="Initiatives.initiativeId" *ngFor="let Initiatives of  InitiativesList">{{Initiatives.name}}</option>
+            <select (change)="getAllProgramName($event)" formControlName="initiativeId" class="form-select"
+              [ngClass]="FormSelection.get('initiativeId')?.touched ? (FormSelection.get('initiativeId')?.errors ? 'is-invalid':'is-valid') :''"
+              formControlName="initiativeId">
+              <option>اختر</option>
+              <option [value]="Initiatives.initiativeId" *ngFor="let Initiatives of  InitiativesList">
+                {{Initiatives.name}}</option>
             </select>
           </div>
-        
-        </div>    
- <!-- ////////////////////////////////////////////////////////////// -->
 
-<div class="row mt-5">
+        </div>
+        <!-- ////////////////////////////////////////////////////////////// -->
 
-  <div class="col-md-3">
-    <label for="">اسم البرنامج</label>
-    <select (change)="GetFilteredPrograms()" class="form-select"
-     formControlName="executivePlanDetailId"
-     [ngClass]="FormSelection.get('executivePlanDetailId')?.touched ? (FormSelection.get('executivePlanDetailId')?.errors ? 'is-invalid':'is-valid') :''"    >
-     <option value="">اختر</option>
-     <option *ngFor="let getPrograms of programNameList" >{{getPrograms.program}}</option>
-    </select>
-  </div>
+        <div class="row mt-5">
 
-  <div class="col-md-3">  
-    <label for="">الكفاية</label>
-    <select class="form-select" 
-    formControlName="programPurposeId" 
-    [ngClass]="FormSelection.get('programPurposeId')?.touched ? (FormSelection.get('programPurposeId')?.errors ? 'is-invalid':'is-valid') :''"    >>
-      <option >اختر</option>
-      <option value="1"> أن يحفظ الطالب الأصول الثلاثة</option>
-      <option value="2"> أن يعظم الطالب القرآن</option>
-      <option value="3"> أن يتعرف الطالب على كيفية محبة الله</option>
-      <option value="4"> أن يدرك الطالب أهمية بر الوالدين</option>
-      <option value="5"> أن يحفظ الطالب بعض قصار السور</option>
-    </select>
-  </div>
+          <div class="col-md-3">
+            <label for="">اسم البرنامج</label>
+            <select (change)="GetFilteredPrograms()" class="form-select" formControlName="executivePlanDetailId"
+              [ngClass]="FormSelection.get('executivePlanDetailId')?.touched ? (FormSelection.get('executivePlanDetailId')?.errors ? 'is-invalid':'is-valid') :''">
+              <option value="">اختر</option>
+              <option *ngFor="let getPrograms of programNameList">{{getPrograms.program}}</option>
+            </select>
+          </div>
 
-  <div class="col-md-3">
-    <label for="">يحتاج الي موافقه</label>
-    <div class="input-group">
-      <div class="form-control">
-        <input type="checkbox" formControlName="requiredApproval"
-        [ngClass]="FormSelection.get('requiredApproval')?.touched ? (FormSelection.get('requiredApproval')?.errors ? 'is-invalid':'is-valid') :''" />
-      </div>
-      
-    </div>
-  </div>
+          <div class="col-md-3">
+            <label for="">الكفاية</label>
+            <select class="form-select" formControlName="programPurposeId"
+              [ngClass]="FormSelection.get('programPurposeId')?.touched ? (FormSelection.get('programPurposeId')?.errors ? 'is-invalid':'is-valid') :''">>
+              <option>اختر</option>
+              <option value="1"> أن يحفظ الطالب الأصول الثلاثة</option>
+              <option value="2"> أن يعظم الطالب القرآن</option>
+              <option value="3"> أن يتعرف الطالب على كيفية محبة الله</option>
+              <option value="4"> أن يدرك الطالب أهمية بر الوالدين</option>
+              <option value="5"> أن يحفظ الطالب بعض قصار السور</option>
+            </select>
+          </div>
 
-  <div class="col-md-3" *ngIf="this.FormSelection?.get('programCategoryId')?.value == 4">
-    <label for=""> تاريخ المناقشة</label>
-    <input type="date" 
-    formControlName="discussionDate"
-     class="form-control" 
-     [ngClass]="FormSelection.get('discussionDate')?.touched ? (FormSelection.get('discussionDate')?.errors ? 'is-invalid':'is-valid') :''" />
-    </div>
+          <div class="col-md-3">
+            <label for="">يحتاج الي موافقه</label>
+            <div class="input-group">
+              <div class="form-control">
+                <input type="checkbox" formControlName="requiredApproval"
+                  [ngClass]="FormSelection.get('requiredApproval')?.touched ? (FormSelection.get('requiredApproval')?.errors ? 'is-invalid':'is-valid') :''" />
+              </div>
 
-</div>
+            </div>
+          </div>
 
- <!-- ////////////////////////////////////////////////////////////// -->
+          <div class="col-md-3" *ngIf="this.FormSelection?.get('programCategoryId')?.value == 4">
+            <label for=""> تاريخ المناقشة</label>
+            <input type="date" formControlName="discussionDate" class="form-control"
+              [ngClass]="FormSelection.get('discussionDate')?.touched ? (FormSelection.get('discussionDate')?.errors ? 'is-invalid':'is-valid') :''" />
+          </div>
+
+        </div>
+
+        <!-- ////////////////////////////////////////////////////////////// -->
 
         <div class="row">
-          <div class="col-md-3 mt-5" *ngIf="this.FormSelection?.get('programCategoryId')?.value == 4" >
+          <div class="col-md-3 mt-5" *ngIf="this.FormSelection?.get('programCategoryId')?.value == 4">
             <label for=""> عدد الصفحات</label>
-            <input type="number" 
-            formControlName="pagesCount" 
-            [ngClass]="FormSelection.get('pagesCount')?.touched ? (FormSelection.get('pagesCount')?.errors ? 'is-invalid':'is-valid')  :''"
-            class="form-control" />
+            <input type="number" formControlName="pagesCount"
+              [ngClass]="FormSelection.get('pagesCount')?.touched ? (FormSelection.get('pagesCount')?.errors ? 'is-invalid':'is-valid')  :''"
+              class="form-control" />
           </div>
 
 
-          <div class="col-md-3"*ngIf="this.FormSelection?.get('programCategoryId')?.value == 5" >
+          <div class="col-md-3" *ngIf="this.FormSelection?.get('programCategoryId')?.value == 5">
             <label for=""> المدرب</label>
-            <input type="text"
-             formControlName="trainerName"
-             [ngClass]="FormSelection.get('trainerName')?.touched ? (FormSelection.get('trainerName')?.errors ? 'is-invalid':'is-valid')  :''"
-             class="form-control" />
+            <input type="text" formControlName="trainerName"
+              [ngClass]="FormSelection.get('trainerName')?.touched ? (FormSelection.get('trainerName')?.errors ? 'is-invalid':'is-valid')  :''"
+              class="form-control" />
           </div>
 
 
           <div class="col-md-3" *ngIf="this.FormSelection?.get('programCategoryId')?.value == 5">
             <label for="showAdditional"> عدد الساعات</label>
-            <input type="number"
-             formControlName="hoursCount"
-             [ngClass]="FormSelection.get('hoursCount')?.touched ? (FormSelection.get('hoursCount')?.errors ? 'is-invalid':'is-valid')  :''"
-             class="form-control" />
+            <input type="number" formControlName="hoursCount"
+              [ngClass]="FormSelection.get('hoursCount')?.touched ? (FormSelection.get('hoursCount')?.errors ? 'is-invalid':'is-valid')  :''"
+              class="form-control" />
           </div>
         </div>
 
-          <div class=" col-md-12 mt-5">
-            <h6>التعريف بالبرنامج 
-              <span class="text-danger" *ngIf="FormSelection.get('description')?.errors">
-                التعريف بالبرنامج يجب الا يقل عن 25 حرف.
-              </span>
+        <div class=" col-md-12 mt-5">
+          <h6>التعريف بالبرنامج
+            <span class="text-danger" *ngIf="FormSelection.get('description')?.errors">
+              التعريف بالبرنامج يجب الا يقل عن 25 حرف.
+            </span>
           </h6>
-            <div class="form-floating">
-              <textarea 
-               class="form-control"  formControlName="description" 
-               [ngClass]="FormSelection.get('description')?.touched ? (FormSelection.get('description')?.errors ? 'is-invalid':'is-valid')  :''"
-               placeholder="Leave a comment here" id="floatingTextarea2"
-                style="height: 100px">
+          <div class="form-floating">
+            <textarea class="form-control" formControlName="description"
+              [ngClass]="FormSelection.get('description')?.touched ? (FormSelection.get('description')?.errors ? 'is-invalid':'is-valid')  :''"
+              placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px">
               </textarea>
-              <label for="floatingTextarea2">Comments</label>
-            </div>
+            <label for="floatingTextarea2">Comments</label>
           </div>
-          <div class="col-md-12 mt-5">
-            <h6>رابط المشاهدة</h6>
-            <div class="form-floating">
-              <textarea class="form-control"formControlName="details" 
-              placeholder="Leave a comment here" 
+        </div>
+        <div class="col-md-12 mt-5">
+          <h6>رابط المشاهدة</h6>
+          <div class="form-floating">
+            <textarea class="form-control" formControlName="details" placeholder="Leave a comment here"
               id="floatingTextarea2"
               [ngClass]="FormSelection.get('details')?.touched ? (FormSelection.get('details')?.errors ? 'is-invalid':'is-valid') :''"
-                style="height: 100px"></textarea>
-              <label for="floatingTextarea2">Comments</label>
-            </div>
-          </div>
-
-          <div class="col-md-12 mt-5">
-            <div *ngIf="ToggleClassRoomsList">
-            <div class=" d-flex" >
-              <input class="form-check-input"  type="checkbox" value="" id="flexCheckDefault" (click)="getSellectAll($event)"/>
-            <h6> 
-              المراحل التعليميه
-              <span class="text-danger stageName" *ngIf="FormSelection.get('educationStagePrograms')?.errors"> يرجي اختيار المرحلة التعليمية</span>
-               </h6>
-              </div>
-         <div class="row">
-          <div class="col-md-2" *ngFor="let ClassRooms of ClassRoomsList?.result" >
-          <div class="d-flex mt-3" >
-              <div class="form-check">
-                <input class="form-check-input stage" type="checkbox" 
-                 [value]="ClassRooms.classroomId" id="flexCheckDefault" 
-                 (change)="onCheckboxChange($event)">
-              </div>
-              <p>{{ClassRooms.name}} <span>{{ClassRooms.stageName}}</span></p>
-            </div>
-          </div>
-         </div>      
+              style="height: 100px"></textarea>
+            <label for="floatingTextarea2">Comments</label>
           </div>
         </div>
 
-          <div class="col-md-12 mt-5" >
-            <div *ngIf="ToggleActivityGroupList">
+        <div class="col-md-12 mt-5">
+          <div *ngIf="ToggleClassRoomsList">
             <div class=" d-flex">
-            <div class="form-check" >
-              <input class="form-check-input"  type="checkbox" value="2" id="flexCheckDefault" (click)="getSelectActivityAll($event)" />
-              <!-- [ngClass]="FormSelection.get('requiredApproval')?.touched ? (FormSelection.get('requiredApproval')?.errors ? 'is-invalid':'is-valid') :''" /> -->
-
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
+                (click)="getSellectAll($event)" />
+              <h6>
+                المراحل التعليميه
+                <span class="text-danger stageName" *ngIf="FormSelection.get('educationStagePrograms')?.errors"> يرجي
+                  اختيار المرحلة التعليمية</span>
+              </h6>
             </div>
-            <h6> 
-              مجموعات الانشطة 
-              <span class="text-danger" *ngIf="!SelectedOneOrMoreActivityGroup()">يرجي اختيار مجموعات انشطة</span>
-               </h6>
-              </div>
-              <div class="row">
-              <div class="col-md-2" *ngFor="let activityGroup of ActivityGroupList?.result" >
+            <div class="row">
+              <div class="col-md-2" *ngFor="let ClassRooms of ClassRoomsList?.result">
                 <div class="d-flex mt-3">
                   <div class="form-check">
-                    <input class="form-check-input activity" (change)="onCheckactivitybox($event)" type="checkbox" [value]="activityGroup.activityGroupId" id="flexCheckDefault" />
+                    <input class="form-check-input stage" type="checkbox" [value]="ClassRooms.classroomId"
+                      id="flexCheckDefault" (change)="onCheckboxChange($event)">
+                  </div>
+                  <p>{{ClassRooms.name}} <span>{{ClassRooms.stageName}}</span></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-12 mt-5">
+          <div *ngIf="ToggleActivityGroupList">
+            <div class=" d-flex">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="2" id="flexCheckDefault"
+                  (click)="getSelectActivityAll($event)" />
+                <!-- [ngClass]="FormSelection.get('requiredApproval')?.touched ? (FormSelection.get('requiredApproval')?.errors ? 'is-invalid':'is-valid') :''" /> -->
+
+              </div>
+              <h6>
+                مجموعات الانشطة
+                <span class="text-danger" *ngIf="!SelectedOneOrMoreActivityGroup()">يرجي اختيار مجموعات انشطة</span>
+              </h6>
+            </div>
+            <div class="row">
+              <div class="col-md-2" *ngFor="let activityGroup of ActivityGroupList?.result">
+                <div class="d-flex mt-3">
+                  <div class="form-check">
+                    <input class="form-check-input activity" (change)="onCheckactivitybox($event)" type="checkbox"
+                      [value]="activityGroup.activityGroupId" id="flexCheckDefault" />
                   </div>
                   <p>{{activityGroup.name}}</p>
                 </div>
-              </div>     
+              </div>
             </div>
           </div>
         </div>
         <div class="col-md-12">
-          <table class="table table-bordered border-primary">
-            <thead>
-              <tr>
+
+
+          <form [formGroup]="myForm" (ngSubmit)="test2()">
+            <table class=" table-cp-list ng-pristine table table-bordered border-primary">
+              <thead>
+                <tr>
                   <th class="w-50 text-center">الاسم</th>
-                  <th>تقييم فردي	</th>
-                  <th>تقييم مجموعات البرامج والأنشطة	</th>
-                  <th>تعديل التقييمات السابقة	</th>
-                  <th>عدد الأيام	</th>
+                  <th>تقييم فردي </th>
+                  <th>تقييم مجموعات البرامج والأنشطة </th>
+                  <th>تعديل التقييمات السابقة </th>
+                  <th>عدد الأيام </th>
                   <th>إضافة</th>
-              </tr>
-            </thead>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Loop through the FormArray to display rows -->
+                <tr>
+                  <!-- Select Option Column -->
+                  <td>
+                    <select id="dropdown" name="dropdown" formControlName="supervisorId">
+                      <option disabled>Select an option</option>
+                      <option *ngFor="let option of options" [value]="option">{{ option }}</option>
+                    </select>
+                  </td>
 
-            <tbody>
-              <tr  (change)="text($event)" >
-                <td class="w-50 text-center">
-                  <select class="form-select" >
-                    <option >اختر</option>
-                    <option *ngFor="let SupervisorName of programSupervisorsList" >
-                    {{SupervisorName.fullName}}
-                    </option>
-                  </select>
-                </td>
+                  <!-- Checkbox 1 Column -->
+                  <td>
+                    <input type="checkbox" formControlName="isStudentEvaluation">
+                  </td>
+
+                  <!-- Checkbox 2 Column -->
+                  <td>
+                    <input type="checkbox" formControlName="isGroupEvaluation">
+                  </td>
+
+                  <!-- Checkbox 3 Column -->
+                  <td>
+                    <input type="checkbox" formControlName="canEditOldEvaluation">
+                  </td>
+                  <td>
+                    <!-- Button to add new row -->
+                    <!-- <button type="button" (click)="addRow()">Add Row</button> -->
+                    <input type="number" formControlName="oldEvaluationDaysCount">
+
+                  </td>
+                  <td>
+                    <button type="submit">Submit</button>
+
+                  </td>
+                </tr>
+              </tbody>
+            </table>
 
 
-                <td >
-                  <div class="form-check d-flex justify-content-around m-auto"  >
-                    <input class="form-check-input text-center justify-content-s align-item-center" type="checkbox" value="" id="flexCheckIndeterminate">
-                  </div>
-                </td>
-                <td>
-                  <div cclass="form-check d-flex justify-content-around m-auto" >
-                    <input class="form-check-input text-center justify-content-s align-item-center" type="checkbox" value="" id="flexCheckIndeterminate">
-                  </div>
-                </td>
 
-                <td>
-                  <div cclass="form-check d-flex justify-content-around m-auto" >
-                    <input class="form-check-input text-center justify-content-s align-item-center" type="checkbox" value="" id="flexCheckIndeterminate">
-                  </div>
-                </td>      
-                <td>
-                  <input type="number"  style="width: 50px;">
-                </td>      
-                <td>
-                  <button class="btn btn-primary" type="submit">
-                    +
-                  </button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+            <!-- Submit Button -->
+          </form>
+
+
         </div>
 
-        <div class="">
-          <button class="btn btn-success" (click)="OnSave()" type="submit">حفظ</button>
-        </div>
+        <!-- <a class="btn btn-success" (click)="OnSave()">حفظ</a> -->
       </form>
     </div>
   </div>

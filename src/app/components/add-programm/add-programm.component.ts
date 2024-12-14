@@ -21,6 +21,8 @@ import { RouterModule } from '@angular/router';
   styleUrl: './add-programm.component.scss',
 })
 export class AddProgrammComponent implements OnInit {
+
+  x!: FormGroup;
   FormSelection!: FormGroup;
   StageForm!: FormGroup;
   ActivityForm!: FormGroup;
@@ -34,9 +36,9 @@ export class AddProgrammComponent implements OnInit {
   ActivityGroupList!: any;
   programNameList!: any;
   educationStageArray: any;
-  programSupervisorsList!:any;
+  programSupervisorsList!: any;
   onClassShow = true;
-  onActivityShow=true;
+  onActivityShow = true;
   ToggleActivityGroupList = false;
   ToggleClassRoomsList = true;
   constructor(
@@ -54,6 +56,11 @@ export class AddProgrammComponent implements OnInit {
     // this.onemptied()
     this.getprogramSupervisors();
     this.CustomValidators();
+    this.text()
+
+    // this.form = this.fb.group({
+    //   rows: this.fb.array([this.createRow()]) // Start with one row
+    // });
   }
 
   intialForm() {
@@ -97,6 +104,7 @@ export class AddProgrammComponent implements OnInit {
       activityGroupPrograms: this.fb.array([]),
       programSupervisors: this.fb.array([]),
     });
+
   }
 
   // get programCategoryId(){
@@ -107,10 +115,10 @@ export class AddProgrammComponent implements OnInit {
 
   test() {
     // console.log(this.FormSelection?.get('programCategoryId')?.value);
-    if(this.FormSelection?.get('programCategoryId')?.value == 1){
+    if (this.FormSelection?.get('programCategoryId')?.value == 1) {
       this.ToggleActivityGroupList = true;
       this.ToggleClassRoomsList = false
-    }else{
+    } else {
       this.ToggleActivityGroupList = false;
       this.ToggleClassRoomsList = true
     }
@@ -136,6 +144,7 @@ export class AddProgrammComponent implements OnInit {
     });
   }
 
+
   getAllProgramName(event: any) {
     let initiativeId = event.target.value;
     let programGroupObj = {
@@ -156,7 +165,7 @@ export class AddProgrammComponent implements OnInit {
       });
   }
 
-  GetFilteredPrograms() {}
+  GetFilteredPrograms() { }
 
   onSubmit() {
     if (this.FormSelection.valid) {
@@ -164,13 +173,13 @@ export class AddProgrammComponent implements OnInit {
     }
   }
 
-   //   get descriptionareaControl() {
-   //     return this.FormSelection?.get('description')
+  //   get descriptionareaControl() {
+  //     return this.FormSelection?.get('description')
   //  }
 
 
 
-// ******************** START ActivityList **************************
+  // ******************** START ActivityList **************************
 
   get activityGroupPrograms(): FormArray {
     return this.FormSelection.get('activityGroupPrograms') as FormArray;
@@ -205,7 +214,7 @@ export class AddProgrammComponent implements OnInit {
     }
     console.log(this.activityGroupPrograms.value);
   }
-  
+
 
   onCheckactivitybox(event: any) {
     this.educationStagePrograms.clear()
@@ -227,16 +236,16 @@ export class AddProgrammComponent implements OnInit {
     }
   }
 
-  
+
   SelectedOneOrMoreActivityGroup(): boolean {
     return this.activityGroupPrograms.length > 0  // Returns true if one or more options are selected or if "Select All" is checke
   }
-// ******************** END ActivityList **************************
+  // ******************** END ActivityList **************************
 
 
 
 
-// ********************START EducationSList **************************
+  // ********************START EducationSList **************************
   get educationStagePrograms(): FormArray {
     return this.FormSelection.get('educationStagePrograms') as FormArray;
   }
@@ -292,9 +301,9 @@ export class AddProgrammComponent implements OnInit {
     return this.educationStagePrograms.length > 0  // Returns true if one or more options are selected or if "Select All" is checke
   }
 
-// ********************END EducationSList **************************
+  // ********************END EducationSList **************************
 
- 
+
 
 
   //
@@ -302,143 +311,228 @@ export class AddProgrammComponent implements OnInit {
   //   return this.selectedOptions.length > 0; // Returns true if one or more options are selected
   // }
 
-// ******************** END ActivityList **************************
+  // ******************** END ActivityList **************************
 
 
 
 
 
 
+  // **********************START  programSupervisors  ************************
+  // data = [
+  //   { supervisorId: "امجاد محمد لهيب الماجدي ", id: '1', isStudentEvaluation: false, isGroupEvaluation: false, canEditOldEvaluation: false, oldEvaluationDaysCount: 0 },
+  //   { supervisorId: "جواهر حامد خايل العتيبي", id: '2', isStudentEvaluation: false, isGroupEvaluation: false, canEditOldEvaluation: false, oldEvaluationDaysCount: 0 },
+  //   { supervisorId: "عليا حامد خايل العتيبي", id: '3', isStudentEvaluation: false, isGroupEvaluation: false, canEditOldEvaluation: false, oldEvaluationDaysCount: 0 },
+  //   { supervisorId: "بشري علي ساؤي العنزي", id: '4', isStudentEvaluation: false, isGroupEvaluation: false, canEditOldEvaluation: false, oldEvaluationDaysCount: 0 },
+  // ]
 
-// **********************START  programSupervisors  ************************
-
-get programSupervisors(): FormArray{
-  return this.FormSelection.get('programSupervisors') as FormArray;
-}
-
-FillprogramSupervisors(supervisorId:string,isGroupEvaluation:boolean,isStudentEvaluation:boolean,canEditOldEvaluation:boolean,oldEvaluationDaysCount:boolean){
-  let SupervisorForm = this.fb.group({
-    supervisorId: [supervisorId],
-    isGroupEvaluation: [isGroupEvaluation],
-    isStudentEvaluation: [isStudentEvaluation],
-    canEditOldEvaluation: [canEditOldEvaluation],
-    oldEvaluationDaysCount: [oldEvaluationDaysCount],
-  })
-  console.log(SupervisorForm.controls);
-  this.programSupervisors.push(SupervisorForm)
-  console.log(this.programSupervisors.value);
-}
-
-text(event: any){
-  let Id =this.FormSelection.get('programSupervisors')?.value;
-  console.log(Id);
-
-
-  // if (event.target.checked) {
-  // }
-
-
- 
-}
-
-getprogramSupervisors(){
-  this._AddProgramService.programSupervisors.subscribe((res)=>{
-    this.programSupervisorsList = res.result;
-    console.log(this.programSupervisorsList);
-  })
-}
-
-// ******************** END programSupervisors **************************
-
-OnSave(){
-  var Test = this.findInvalidControls(this.FormSelection)
-  console.log(Test);
-  
-  console.log(this.FormSelection.valid);
-  console.log(this.FormSelection.value);
-  
-}
-
-minArrayLength(min = 1) {
-  var validator: any = (formArray: any) => {
-    if (formArray instanceof FormArray) {
-      var totalSelected = formArray.controls.length;    
-    return totalSelected >= min ? null : { required: true };
-    }
-    throw new Error('formArray is not an instance of FormArray');
-  };
-  return validator;
-}
-
-
-findInvalidControls(form:FormGroup) {
-  var invalid = [];
-  var controls = form.controls;
-  for (var name in controls) {
-      if (controls[name].invalid) {
-          invalid.push(name);
-      }
+  get programSupervisors(): FormArray {
+    return this.FormSelection.get('programSupervisors') as FormArray;
   }
-  return invalid;
-}
+  SupervisorForm: any
+  FillprogramSupervisors(
+    supervisorId: string,
+    isStudentEvaluation: boolean,
+    isGroupEvaluation: boolean,
+    canEditOldEvaluation: boolean,
+    oldEvaluationDaysCount: number) {
+    this.SupervisorForm = this.fb.group({
+      supervisorId: [supervisorId],
+      isStudentEvaluation: [isStudentEvaluation],
+      isGroupEvaluation: [isGroupEvaluation],
+      canEditOldEvaluation: [canEditOldEvaluation],
+      oldEvaluationDaysCount: [oldEvaluationDaysCount],
+    })
+    console.log(this.SupervisorForm.controls);
+    this.programSupervisors.push(this.SupervisorForm)
+    // console.log(this.programSupervisors.value);
+  }
 
-CustomValidators() {
-  
-  this.FormSelection?.get('programCategoryId')?.valueChanges.subscribe( (val:number) =>{
-  // ********************val == 4**********************
 
-    console.log(val);
-    if(val == 4){
-      this.FormSelection.get('pagesCount')?.setValidators([Validators.required])
-      this.FormSelection.get('discussionDate')?.setValidators([Validators.required])
-    } 
-     else{
-      this.FormSelection.get('pagesCount')?.clearValidators();
-      this.FormSelection.get('discussionDate')?.clearValidators();
-      this.FormSelection.patchValue({
-        pagesCount:'',
-        discussionDate:'',
-      })
-    }
-    this.FormSelection.get('pagesCount')?.updateValueAndValidity();
-    this.FormSelection.get('discussionDate')?.updateValueAndValidity();
+  myForm!: FormGroup;
+  text() {
+    this.myForm = this.fb.group({
+      supervisorId: ['', Validators.required],
+      isStudentEvaluation: [false, Validators.required],
+      isGroupEvaluation: [false],
+      canEditOldEvaluation: [false],
+      oldEvaluationDaysCount: [0],
+    })
+    this.programSupervisors.push(this.myForm)
 
-// ********************val == 5**********************
-  if  (val == 5) {
-      this.FormSelection.get('trainerName')?.setValidators([Validators.required])
-      this.FormSelection.get('hoursCount')?.setValidators([Validators.required])
+  }
+  test2() {
+    console.log(this.myForm.value);
+    console.log(this.programSupervisors);
+  }
+  // (this.form.get('items') as FormArray).push(newFormGroup);
+  // 
+
+  getprogramSupervisors() {
+    this._AddProgramService.programSupervisors.subscribe((res) => {
+      this.programSupervisorsList = res.result;
+      console.log(this.programSupervisorsList);
+    })
+  }
+
+  // ******************** END programSupervisors **************************
+
+  OnSave() {
+    var Test = this.findInvalidControls(this.FormSelection)
+    console.log(Test);
+
+    console.log(this.FormSelection.valid);
+    console.log(this.FormSelection.value);
+  }
+
+  minArrayLength(min = 1) {
+    var validator: any = (formArray: any) => {
+      if (formArray instanceof FormArray) {
+        var totalSelected = formArray.controls.length;
+        return totalSelected >= min ? null : { required: true };
+      }
+      throw new Error('formArray is not an instance of FormArray');
+    };
+    return validator;
+  }
+
+
+  findInvalidControls(form: FormGroup) {
+    var invalid = [];
+    var controls = form.controls;
+    for (var name in controls) {
+      if (controls[name].invalid) {
+        invalid.push(name);
+      }
     }
-     else{
-     this.FormSelection.get('trainerName')?.clearValidators();
-     this.FormSelection.get('hoursCount')?.clearValidators();
-      this.FormSelection.patchValue({
-        trainerName:'',
-        hoursCount:'',
-      })
-    }
+    return invalid;
+  }
+
+  CustomValidators() {
+
+    this.FormSelection?.get('programCategoryId')?.valueChanges.subscribe((val: number) => {
+      // ********************val == 4**********************
+
+      console.log(val);
+      if (val == 4) {
+        this.FormSelection.get('pagesCount')?.setValidators([Validators.required])
+        this.FormSelection.get('discussionDate')?.setValidators([Validators.required])
+      }
+      else {
+        this.FormSelection.get('pagesCount')?.clearValidators();
+        this.FormSelection.get('discussionDate')?.clearValidators();
+        this.FormSelection.patchValue({
+          pagesCount: '',
+          discussionDate: '',
+        })
+      }
+      this.FormSelection.get('pagesCount')?.updateValueAndValidity();
+      this.FormSelection.get('discussionDate')?.updateValueAndValidity();
+
+      // ********************val == 5**********************
+      if (val == 5) {
+        this.FormSelection.get('trainerName')?.setValidators([Validators.required])
+        this.FormSelection.get('hoursCount')?.setValidators([Validators.required])
+      }
+      else {
+        this.FormSelection.get('trainerName')?.clearValidators();
+        this.FormSelection.get('hoursCount')?.clearValidators();
+        this.FormSelection.patchValue({
+          trainerName: '',
+          hoursCount: '',
+        })
+      }
       this.FormSelection.get('trainerName')?.updateValueAndValidity();
       this.FormSelection.get('hoursCount')?.updateValueAndValidity();
 
-// ********************val == 1**********************
+      // ********************val == 1**********************
 
-     if  (val == 1) {
-      this.FormSelection.get('activityGroupPrograms')?.setValidators(this.minArrayLength())
-      this.FormSelection.get('educationStagePrograms')?.clearValidators()
+      if (val == 1) {
+        this.FormSelection.get('activityGroupPrograms')?.setValidators(this.minArrayLength())
+        this.FormSelection.get('educationStagePrograms')?.clearValidators()
 
-    } else{
-      this.FormSelection.get('activityGroupPrograms')?.clearValidators();
-      this.FormSelection.get('educationStagePrograms')?.setValidators(this.minArrayLength())
+      } else {
+        this.FormSelection.get('activityGroupPrograms')?.clearValidators();
+        this.FormSelection.get('educationStagePrograms')?.setValidators(this.minArrayLength())
 
-      this.FormSelection.patchValue({
-        activityGroupPrograms:[],
-        educationStagePrograms:[]
-      })
-    }
-    this.FormSelection.get('activityGroupPrograms')?.updateValueAndValidity();
-    this.FormSelection.get('educationStagePrograms')?.updateValueAndValidity();
-  })
-}
+        this.FormSelection.patchValue({
+          activityGroupPrograms: [],
+          educationStagePrograms: []
+        })
+      }
+      this.FormSelection.get('activityGroupPrograms')?.updateValueAndValidity();
+      this.FormSelection.get('educationStagePrograms')?.updateValueAndValidity();
+    })
+  }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  // Array of options for the select dropdown
+  options = [
+    "امجاد محمد لهيب الماجدي ",
+    "جواهر حامد خايل العتيبي",
+    "عليا حامد خايل العتيبي",
+    "بشري علي ساؤي العنزي"
+  ];
+  // Get the values of the form and log them
+  submitForm() {
+    console.log(this.programSupervisors.controls);  // Logs all form values
+  }
 
 
 }
